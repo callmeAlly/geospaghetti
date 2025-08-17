@@ -781,7 +781,7 @@
 
     map.createPane('blockerPane');
     map.getPane('blockerPane').style.zIndex = 14500; 
-    map.getPane('blockerPane').style.pointerEvents = 'auto';
+    map.getPane('blockerPane').style.pointerEvents = 'none';
 
     let fullMapBounds = [
         [0,0],
@@ -820,6 +820,7 @@
             measureOverlay.addTo(map);
             measureBtn.textContent = 'Cancel Measurement';
             measureBtn.style.color = '#f66';
+            map.getPane('blockerPane').style.pointerEvents = 'auto';
             
         } else {
             console.log("Measuring mode OFF");
@@ -839,6 +840,7 @@
             measureMarkerStart = null;
             measureMarkerEnd = null;
             startLatLng = null;
+            map.getPane('blockerPane').style.pointerEvents = 'none';
 
             measureBtn.textContent = 'Measure Mode';
             measureText.textContent = '';
