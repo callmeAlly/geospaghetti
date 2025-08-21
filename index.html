@@ -190,6 +190,10 @@
             z-index: 15000;
         }
 
+        
+
+        
+        
         @font-face {
             font-family: "Quicksand";
             src: url("fonts/Quicksand-Regular.ttf") format("truetype"),
@@ -239,6 +243,7 @@
             src: url("fonts/Sarpanch-Regular.ttf") format("truetype"),
             url("fonts/Sarpanch-Medium.ttf") format("truetype");
         }
+        
 
 
     </style>
@@ -460,9 +465,14 @@
         zoomDelta: 1,
         zoomSnap: 1,
         continuousWorld: false,
+        
         keepBuffer:0,
+        
         reuseTiles: true,
+        
 
+        
+        
     }).addTo(map);
     
     
@@ -2506,6 +2516,18 @@
             `
         },
         {
+            id: "outdoorSitting",
+            position: transCoord(5075,975),
+            icon: poiIcons["sync"],
+            isSelected: false,
+            zoomThreshold: 0,
+            title: `<span style="color: white; font-family: 'Jura'; font-size: 24px; font-weight: normal;">Outdoor Sitting</span>`,
+            content: `
+                <img src="images/icons/lol.png" alt="Outdoor Sitting" style="width: 100%; border-radius: 8px; margin-bottom: 10px;">
+                <p><span style="color: white; font-family: 'Source Sans 3'; font-weight: 300;">Come, have a seat.</span></p>
+            `
+        },
+        {
             id: "zephyrEntrance1",
             position: transCoord(5355,1395),
             icon: poiIcons["sync"],
@@ -2519,7 +2541,7 @@
         },
         {
             id: "zephyrSecurityCheckpoint",
-            position: transCoord(5047,975),
+            position: transCoord(5047,933),
             icon: poiIcons["sync"],
             isSelected: false,
             zoomThreshold: 0,
@@ -2531,7 +2553,7 @@
         },
         {
             id: "zephyrRecRoom",
-            position: transCoord(5435,930),
+            position: transCoord(5435,910),
             icon: poiIcons["sync"],
             isSelected: false,
             zoomThreshold: 0,
@@ -2555,7 +2577,7 @@
         },
         {
             id: "zephyrViewpoint",
-            position: transCoord(5365,925),
+            position: transCoord(5365,915),
             icon: poiIcons["sync"],
             isSelected: false,
             zoomThreshold: 0,
@@ -2567,7 +2589,7 @@
         },
         {
             id: "zephyrTop",
-            position: transCoord(5405,900),
+            position: transCoord(5415,900),
             icon: poiIcons["sync"],
             isSelected: false,
             zoomThreshold: 0,
@@ -3877,7 +3899,7 @@
         },
         {
             id: "fragmentRouter42",     
-            position: transCoord(5425,948),
+            position: transCoord(5415,930),
             icon: poiIcons["router"],
             isSelected: false,
             zoomThreshold: 0,
@@ -4011,7 +4033,7 @@
         },
         {
             id: "zephyrSpawnRegion",
-            position: transCoord(5435,955),
+            position: transCoord(5435,935),
             icon: poiIcons["transceiver"],
             isSelected: false,
             zoomThreshold: -1.5,
@@ -4279,7 +4301,7 @@
             
         {
             id: "aluminumCasing",
-            position: transCoord(5435,933),
+            position: transCoord(5435,922),
             icon: poiIcons["resource"],
             isSelected: false,
             zoomThreshold: -0.5,
@@ -4315,7 +4337,7 @@
         },
         {
             id: "magneticCoil2",
-            position: transCoord(5005,924),
+            position: transCoord(5002,868),
             icon: poiIcons["resource"],
             isSelected: false,
             zoomThreshold: -0.5,
@@ -4599,7 +4621,7 @@
                 <span style="color: white; font-family: 'Source Sans 3'; font-weight: 300;"><br>Times:<br></span>
                 
                     <img src="images/icons/platinum.webp" width="18" style="position: relative; top: 2px;">
-                    <span style="color: white; font-family: 'Jura'; font-size: 18px; font-weight: 300;"> 16.000<br></span>
+                    <span style="color: white; font-family: 'Jura'; font-size: 18px; font-weight: 300;"> 16.500<br></span>
                     <img src="images/icons/gold.webp" width="18" style="position: relative; top: 2px;">
                     <span style="color: white; font-family: 'Jura'; font-size: 18px; font-weight: 300;"> 19.000<br></span>
                     <img src="images/icons/silver.webp" width="18" style="position: relative; top: 2px;">
@@ -4778,8 +4800,8 @@
         },
         {
             id: "gale",
-            position: transCoord(5637,840),
-            goalPosition: [transCoord(5372,840)],
+            position: transCoord(5637,800),
+            goalPosition: [transCoord(5335,800)],
             icon: poiIcons["advancedTrial"],
             isSelected: false,
             zoomThreshold: -1.2,
@@ -6176,7 +6198,7 @@
                 <p><span style="font-family: 'Quicksand'; color: white; font-size: 18px;">Fragment is Verna's financial district, and the
                     3rd largest of the main 8 districts.<br>The wide and tall building complexes here rise above the rest of the city,
                     with greener, lower areas to the south, and towering skyscrapers populating the rest of the streets along with the
-                    district's gigantic prime construct, "Highrise".
+                    district's gigantic prime construct, "Zephyr".
                      </span></p>
             `
         },
@@ -7563,7 +7585,7 @@
     function goalDelete() {
         
         let raceSize=goalMarker.length;
-        console.log(raceSize);
+        console.log("Deleting "+raceSize+" checkpoints");
         if (goalMarker[0]==null||goalMarker==[]) {return;}
         
         
@@ -7574,17 +7596,19 @@
                 let goalIcon = goalMarkerAux[i]._icon;
                 requestAnimationFrame(() => {goalIcon.style.opacity = 0;});
                 
+                
             }
             goalMarker=[];
             setTimeout(() => {
                 
                 for (let i = 0; i < goalMarkerAux.length; i++) {
-                    map.removeLayer(goalMarkerAux[0]);
+                    map.removeLayer(goalMarkerAux[i]);
                     
-                    goalMarkerAux.shift();
+                    goalMarkerAux[i]=null;
                     console.log("deleted index "+i);
 
                 }
+                goalMarkerAux=[];
             }, 300);
             goalMarkerDeleting=false;
         } else {
@@ -7639,7 +7663,7 @@
 
 
     function superChangelog64() {
-        if (!isMobile) {
+        if (!isMobile) { 
             document.getElementById("sidebar-title").innerHTML = `
             <span style="font-family: 'Comic Neue Angular'; color: #A17FFF; font-size: 32px; font-weight: normal;">Super Changelog 64</span>`;
             document.getElementById("sidebar-content").innerHTML = `
@@ -7653,7 +7677,7 @@
                     </span></p>
                     <span style="font-family: 'Kalam'; color: #C5AFFF; font-size: 18px;">-Ally</span>
             `;
-            document.getElementById("sidebar").style.right = "0px";
+            document.getElementById("sidebar").style.right = "0px"; 
         }
         openSidebarA();
     }
